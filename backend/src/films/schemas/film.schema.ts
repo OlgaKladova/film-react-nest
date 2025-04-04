@@ -48,7 +48,17 @@ export class Film {
       },
     ]),
   )
-  schedule: Record<string, string | number | string[]>[];
+  schedule: ISchedule[];
+}
+
+export interface ISchedule {
+  id: string;
+  daytime: string;
+  hall: string;
+  rows: number;
+  seats: number;
+  price: number;
+  taken: string[];
 }
 
 export const FilmSchema = SchemaFactory.createForClass(Film);

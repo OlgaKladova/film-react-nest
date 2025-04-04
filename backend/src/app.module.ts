@@ -7,7 +7,11 @@ import { configProvider } from './app.config.provider';
 import { OrderController } from './order/order.controller';
 import { OrderService } from './order/order.service';
 import { MongooseModule } from '@nestjs/mongoose';
-import { FilmsModule } from './films/films.module';
+import { FilmSchema } from './films/schemas/film.schema';
+import { FilmsController } from './films/films.controller';
+import { FilmsService } from './films/films.service';
+import { FilmsRepository } from './repository/films.repository/films.repository';
+import { OrderRepository } from './repository/order.repository/order.repository';
 
 @Module({
   imports: [
@@ -18,12 +22,18 @@ import { FilmsModule } from './films/films.module';
     // @todo: Добавьте раздачу статических файлов из public
     ServeStaticModule.forRoot({
       rootPath: path.join(__dirname, '..', 'public'),
-      serveRoot: '/content/afisha/*',
+      renderPath: '/content/afisha/*',
     }),
     MongooseModule.forRoot(configProvider.useValue.database.url),
-    FilmsModule,
+    MongooseModule.forFeature([{ name: 'Film', schema: FilmSchema }]),
   ],
-  controllers: [OrderController],
-  providers: [configProvider, OrderService],
+  controllers: [FilmsController, OrderController],
+  providers: [
+    configProvider,
+    FilmsService,
+    FilmsRepository,
+    OrderService,
+    OrderRepository,
+  ],
 })
 export class AppModule {}

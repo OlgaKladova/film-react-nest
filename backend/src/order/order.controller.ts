@@ -1,11 +1,15 @@
-import { Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post, UseFilters } from '@nestjs/common';
 import { OrderService } from './order.service';
+import { CreateOrderDto } from './dto/order.dto';
+import { TakenSeatsExceptionFilter } from 'src/filters/taken-seats.filter';
 
 @Controller('order')
+@UseFilters(TakenSeatsExceptionFilter)
 export class OrderController {
   constructor(private readonly orderService: OrderService) {}
   @Post()
-  createOrder() {
-    // return this.orderService.createOrder();
+  async createOrder(@Body() reqBody: CreateOrderDto) {
+    const result = await this.orderService.createOrder(reqBody);
+    return result;
   }
 }

@@ -2,14 +2,15 @@
 export class CreateOrderDto {
   email: string;
   phone: string;
-  tickets: TicketDto[];
+  tickets: CreateTicketDto[];
 }
 
-class TicketDto {
+export class CreateTicketDto {
   film: string;
   session: string;
   daytime: string;
   row: number;
   seat: number;
   price: number;
+  id?: string;
 }
