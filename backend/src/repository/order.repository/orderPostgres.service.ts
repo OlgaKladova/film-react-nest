@@ -22,7 +22,7 @@ export class OrderPostgresService {
       console.error(error);
     }
   }
-  async updatefilm(sessionId: string, taken: string[]): Promise<any> {
+  async updatefilm(sessionId: string, taken: string): Promise<any> {
     try {
       return await this.scheduleRepository.update(
         {

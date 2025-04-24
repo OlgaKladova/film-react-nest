@@ -1,6 +1,6 @@
 import { Film } from 'src/films/entities/filmPostgres.entity';
 import { Column, Entity, ManyToOne, PrimaryColumn } from 'typeorm';
-@Entity({ name: 'schedule' })
+@Entity({ name: 'schedules' })
 export class Schedule {
   @PrimaryColumn('uuid')
   id: string;
@@ -20,8 +20,8 @@ export class Schedule {
   @Column()
   price: number;
 
-  @Column('text', { array: true })
-  taken: string[];
+  @Column('text')
+  taken: string;
 
   @ManyToOne(() => Film, (film) => film.schedule, {
     onDelete: 'CASCADE',

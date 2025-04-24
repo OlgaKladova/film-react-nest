@@ -20,7 +20,11 @@ export class OrderService {
       if (targetSession.taken.includes(takenSeats)) {
         throw new TakenSeatsEception();
       }
-      targetSession.taken.push(takenSeats);
+      if (!targetSession.taken) {
+        targetSession.taken = takenSeats;
+      } else {
+        targetSession.taken = `${targetSession.taken},${takenSeats}`;
+      }
       await this.orderRepository.updatefilm(session, targetSession.taken);
       return ticket;
     });

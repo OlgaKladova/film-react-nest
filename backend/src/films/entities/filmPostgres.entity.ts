@@ -1,6 +1,6 @@
 import { Schedule } from 'src/order/entities/schedulePostgres.entity';
 import { Entity, PrimaryColumn, Column, OneToMany } from 'typeorm';
-@Entity({ name: 'film' })
+@Entity({ name: 'films' })
 export class Film {
   @PrimaryColumn('uuid', { unique: true })
   id: string;
