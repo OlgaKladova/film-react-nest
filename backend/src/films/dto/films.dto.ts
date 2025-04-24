@@ -1,8 +1,8 @@
-import mongoose from 'mongoose';
+import { ObjectId } from 'typeorm';
 
-//TODO описать DTO для запросов к /films
 export class GetFilmDto {
-  id: mongoose.Types.ObjectId;
+  _id?: ObjectId;
+  id: string;
   rating: number;
   director: string;
   tags: string[];
@@ -14,15 +14,30 @@ export class GetFilmDto {
   schedule: {
     id: string;
     daytime: string;
-    hall: string;
+    hall: number;
     rows: number;
     seats: number;
     price: number;
-    taken: string[];
+    taken: string;
   }[];
 }
 
 export class GetFilmsDto {
   total: number;
   items: GetFilmDto[];
+}
+
+export class GetScheduleDto {
+  total: number;
+  items: GetFilmDto['schedule'];
+}
+
+export class GetSessionDto {
+  id: string;
+  daytime: string;
+  hall: number;
+  rows: number;
+  seats: number;
+  price: number;
+  taken: string;
 }

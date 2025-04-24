@@ -1,34 +1,31 @@
 import { Injectable } from '@nestjs/common';
-import { OrderRepository } from 'src/repository/order.repository/order.repository';
 import { faker } from '@faker-js/faker';
-import { FilmsRepository } from 'src/repository/films.repository/films.repository';
 import { CreateOrderDto } from './dto/order.dto';
 import { TakenSeatsEception } from 'src/exceptions/seats-exists.exception';
+import { OrderPostgresService } from 'src/repository/order.repository/orderPostgres.service';
 
 @Injectable()
 export class OrderService {
-  constructor(
-    private readonly orderRepository: OrderRepository,
-    private readonly filmRepository: FilmsRepository,
-  ) {}
+  constructor(private readonly orderRepository: OrderPostgresService) {}
 
   async createOrder(order: CreateOrderDto) {
     const { tickets } = order;
 
     const items = tickets.map(async (ticket) => {
-      const { film, session, row, seat } = ticket;
+      const { session, row, seat } = ticket;
       const takenSeats = `${row}:${seat}`;
       ticket.id = faker.string.uuid();
 
-      const targetSession = await this.orderRepository.getSEssion(
-        film,
-        session,
-      );
-
-      if (targetSession.schedule[0].taken.includes(takenSeats)) {
+      const targetSession = await this.orderRepository.getSEssion(session);
+      if (targetSession.taken.includes(takenSeats)) {
         throw new TakenSeatsEception();
       }
-      await this.orderRepository.updatefilm(film, session, takenSeats);
+      if (!targetSession.taken) {
+        targetSession.taken = takenSeats;
+      } else {
+        targetSession.taken = `${targetSession.taken},${takenSeats}`;
+      }
+      await this.orderRepository.updatefilm(session, targetSession.taken);
       return ticket;
     });
     return {
