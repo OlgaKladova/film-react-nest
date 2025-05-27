@@ -1,4 +1,4 @@
-import { Film } from 'src/films/entities/filmPostgres.entity';
+import { Film } from '../../films/entities/filmPostgres.entity';
 import { Column, Entity, ManyToOne, PrimaryColumn } from 'typeorm';
 @Entity({ name: 'schedules' })
 export class Schedule {

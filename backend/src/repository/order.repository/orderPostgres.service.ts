@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Schedule } from 'src/order/entities/schedulePostgres.entity';
+import { Schedule } from '../../order/entities/schedulePostgres.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -10,7 +10,7 @@ export class OrderPostgresService {
     private scheduleRepository: Repository<Schedule>,
   ) {}
 
-  async getSEssion(sessionId: string): Promise<Schedule> {
+  async getSession(sessionId: string): Promise<Schedule> {
     try {
       const session = await this.scheduleRepository.findOne({
         where: {
@@ -22,7 +22,7 @@ export class OrderPostgresService {
       console.error(error);
     }
   }
-  async updatefilm(sessionId: string, taken: string): Promise<any> {
+  async updateFilm(sessionId: string, taken: string): Promise<any> {
     try {
       return await this.scheduleRepository.update(
         {
