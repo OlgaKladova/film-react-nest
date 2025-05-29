@@ -7,7 +7,7 @@ services:
         VITE_API_URL: "//localhost:3000/api/afisha"
         VITE_CDN_URL: "//localhost:3000/content/afisha"
     container_name: "frontend"
-    image: ghcr.io/olgakladova/frontend:latest
+    image: ghcr.io/olgakladova/film-react-nest/frontend:latest
     networks:
       - webnet
     volumes:
@@ -18,7 +18,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     container_name: backend
-    image: ghcr.io/olgakladova/backend:latest
+    image: ghcr.io/olgakladova/film-react-nest/backend:latest
     networks:
       - webnet
     environment:
