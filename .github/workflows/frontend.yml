@@ -1,4 +1,4 @@
-name: Build Docker image
+name: Build Docker image frontend
 
 on:
   push:
@@ -40,5 +40,5 @@ jobs:
         with:
           context: ./frontend
           push: true
-          tags: ${{ steps.meta.outputs.tags }}/frontend:latest
+          tags: "ghcr.io/olgakladova/film-react-nest/frontend:latest"
           labels: ${{ steps.meta.outputs.labels }}
