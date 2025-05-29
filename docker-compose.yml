@@ -9,7 +9,7 @@ services:
     container_name: "frontend"
     image: ghcr.io/olgakladova/film-react-nest/frontend:latest
     networks:
-      - webnet
+      - front
     volumes:
       - frontend_dist:/usr/www/frontend/dist
     
@@ -79,6 +79,7 @@ services:
       - backend
     networks:
       - webnet
+      - front
 
 volumes:
   frontend_dist:
@@ -88,4 +89,5 @@ volumes:
 networks:
   webnet:
   postgres:
+  front:
  
