@@ -1,4 +1,4 @@
-import { Schedule } from 'src/order/entities/schedulePostgres.entity';
+import { Schedule } from '../../order/entities/schedulePostgres.entity';
 import { Entity, PrimaryColumn, Column, OneToMany } from 'typeorm';
 @Entity({ name: 'films' })
 export class Film {

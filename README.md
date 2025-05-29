@@ -31,6 +31,8 @@ MongoDB должна быть установлена и запущена.
 
 Для проверки отправьте тестовый запрос с помощью Postman или `curl`.
 
+Сайт доступен по по адресу: <http://unbelievable.films.nomorepartiessbs.ru.>
+
 
 
 

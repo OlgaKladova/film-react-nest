@@ -1,9 +1,9 @@
 import { ExceptionFilter, Catch, ArgumentsHost } from '@nestjs/common';
-import { TakenSeatsEception } from '../exceptions/seats-exists.exception';
+import { TakenSeatsException } from '../exceptions/seats-exists.exception';
 
-@Catch(TakenSeatsEception)
+@Catch(TakenSeatsException)
 export class TakenSeatsExceptionFilter implements ExceptionFilter {
-  catch(exception: TakenSeatsEception, host: ArgumentsHost) {
+  catch(exception: TakenSeatsException, host: ArgumentsHost) {
     const status = exception.getStatus();
     const message = exception.getResponse();
     const ctx = host.switchToHttp();

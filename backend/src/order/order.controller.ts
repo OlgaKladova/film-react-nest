@@ -1,7 +1,7 @@
 import { Body, Controller, Post, UseFilters } from '@nestjs/common';
 import { OrderService } from './order.service';
 import { CreateOrderDto } from './dto/order.dto';
-import { TakenSeatsExceptionFilter } from 'src/filters/taken-seats.filter';
+import { TakenSeatsExceptionFilter } from '../filters/taken-seats.filter';
 
 @Controller('order')
 @UseFilters(TakenSeatsExceptionFilter)
